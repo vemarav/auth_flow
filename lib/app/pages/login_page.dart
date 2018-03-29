@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:auth_flow/app/components/error_box.dart';
 import 'package:auth_flow/app/components/email_field.dart';
@@ -16,6 +17,7 @@ class LoginPageState extends State<LoginPage> {
 	
 	bool _isError = false;
 	bool _obscureText = true;
+	bool _isLoading = false;
 	TextEditingController _emailController, _passwordController;
 	String _errorText, _emailError, _passwordError, _email, _password;
 	
@@ -23,7 +25,7 @@ class LoginPageState extends State<LoginPage> {
 	Widget build(BuildContext context) {
 		return new Scaffold(
 			key: _scaffoldKey,
-			body: _loginScreen()
+			body: _isLoading ? _loadingScreen() : _loginScreen()
 		);
 	}
 	
@@ -60,8 +62,18 @@ class LoginPageState extends State<LoginPage> {
 	}
 	
 	_submitForm() {
-	
+    const threeSecond = const Duration(seconds: 3);
+    setState(() {
+      _isLoading = true;
+    });
+    new Timer(threeSecond, _hideLoading);
 	}
+
+	_hideLoading() {
+    setState((){
+      _isLoading = false;
+    });
+  }
 	
 	_togglePassword() {
 		setState(() {
