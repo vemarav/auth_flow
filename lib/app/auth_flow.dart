@@ -6,7 +6,7 @@ class AuthFlow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Authentication Flow',
       theme: new ThemeData(
         primaryColor: Colors.green.shade500,
         textSelectionColor: Colors.green.shade500,
