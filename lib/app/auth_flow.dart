@@ -11,7 +11,7 @@ class AuthFlow extends StatelessWidget {
         primaryColor: Colors.green.shade500,
         textSelectionColor: Colors.green.shade500,
         buttonColor: Colors.green.shade500,
-        accentColor: Colors.green.shade200
+	      accentColor: Colors.green.shade500
       ),
       home: new LoginPage(),
 	    routes: {

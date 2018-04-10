@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthUtils {
 
-	static final String endPoint = '/api/v4/auth_user';
+	static final String endPoint = '/api/v1/auth_user';
 
 	// Keys to store and fetch data from SharedPreferences
 	static final String authTokenKey = 'auth_token';
@@ -19,7 +19,6 @@ class AuthUtils {
 		var user = response['user'];
 		prefs.setInt(userIdKey, user['id']);
 		prefs.setString(nameKey, user['name']);
-		prefs.setString(roleKey, user['role']);
 	}
 	
 }

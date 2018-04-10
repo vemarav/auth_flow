@@ -45,13 +45,31 @@ class LoginPageState extends State<LoginPage> {
 		}
 	}
 
+	_showLoading() {
+		setState(() {
+		  _isLoading = true;
+		});
+	}
+
+	_hideLoading() {
+		setState(() {
+		  _isLoading = false;
+		});
+	}
+
 	_authenticateUser() async {
+		_showLoading();
 		if(_valid()) {
-			var responseJson = await NetworkUtils.authenticateUser(_emailController.text, _passwordController.text);
+			var responseJson = await NetworkUtils.authenticateUser(
+				_emailController.text, _passwordController.text
+			);
+			print(responseJson);
 			if(responseJson == null) {
 				NetworkUtils.showSnackBar(_scaffoldKey, 'Something went wrong!');
 			} else if(responseJson == 'NetworkError') {
 				NetworkUtils.showSnackBar(_scaffoldKey, null);
+			} else if(responseJson['errors'] != null) {
+				NetworkUtils.showSnackBar(_scaffoldKey, 'Invalid Email/Password');
 			} else {
 				AuthUtils.insertDetails(_sharedPreferences, responseJson);
 				/**
@@ -61,8 +79,10 @@ class LoginPageState extends State<LoginPage> {
 				Navigator.of(_scaffoldKey.currentContext)
 					.pushReplacementNamed(HomePage.routeName);
 			}
+			_hideLoading();
 		} else {
 			setState(() {
+				_isLoading = false;
 				_emailError;
 				_passwordError;
 			});
@@ -83,7 +103,7 @@ class LoginPageState extends State<LoginPage> {
 		if(_passwordController.text.isEmpty) {
 			valid = false;
 			_passwordError = "Password can't be blank!";
-		} else if(_passwordController.text.length < 7) {
+		} else if(_passwordController.text.length < 6) {
 			valid = false;
 			_passwordError = "Password is invalid!";
 		}

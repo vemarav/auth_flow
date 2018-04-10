@@ -6,8 +6,8 @@ import 'package:http/http.dart' as http;
 import 'auth_utils.dart';
 
 class NetworkUtils {
-	static final String host = developmentHost;
-	static final String productionHost = 'https://www.yoursite.com';
+	static final String host = productionHost;
+	static final String productionHost = 'https://authflow.herokuapp.com';
 	static final String developmentHost = 'http://192.168.31.110:3000';
 
 	static dynamic authenticateUser(String email, String password) async {
@@ -37,7 +37,6 @@ class NetworkUtils {
 		prefs.setString(AuthUtils.authTokenKey, null);
 		prefs.setInt(AuthUtils.userIdKey, null);
 		prefs.setString(AuthUtils.nameKey, null);
-		prefs.setString(AuthUtils.roleKey, null);
 		Navigator.of(context).pushReplacementNamed('/');
 	}
 

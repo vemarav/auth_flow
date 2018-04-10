@@ -29,7 +29,6 @@ class S extends WidgetsLocalizations {
 class en extends S {
   en(Locale locale) : super(locale);
 }
-
 class GeneratedLocalizationsDelegate extends LocalizationsDelegate<WidgetsLocalizations> {
   const GeneratedLocalizationsDelegate();
 
