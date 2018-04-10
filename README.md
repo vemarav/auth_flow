@@ -1,8 +1,8 @@
-# auth_flow
+# Flutter - Authentication Flow
 
-A new Flutter project.
+This app shows how to authenticate and switch user between pages.
+Ex: Login Page and Home Page.
 
-## Getting Started
-
-For help getting started with Flutter, view our online
-[documentation](https://flutter.io/).
+# Plugins
+    - http: ^0.11.3+16
+    - shared_preferences: ^0.4.1 
