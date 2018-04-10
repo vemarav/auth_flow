@@ -9,8 +9,6 @@ class LoginButton extends StatelessWidget {
 		return new Container(
 			margin: const EdgeInsets.symmetric(vertical: 12.0),
 			child: new Material(
-				borderRadius: new BorderRadius.circular(32.0),
-				shadowColor: Colors.greenAccent.shade100,
 				elevation: 5.0,
 				child: new MaterialButton(
 					color: Theme.of(context).primaryColor,

@@ -18,12 +18,9 @@ class EmailField extends StatelessWidget {
 			    keyboardType: TextInputType.emailAddress,
 			    controller: emailController,
 			    decoration: new InputDecoration(
+						contentPadding: const EdgeInsets.symmetric(vertical: 4.0),
 				    errorText: emailError,
-				    contentPadding: const EdgeInsets.all(12.0),
-				    hintText: 'Email',
-				    border: new OutlineInputBorder(
-					    borderRadius: new BorderRadius.circular(32.0)
-				    )
+				    labelText: 'Email',
 			    )
 		    )
 	    )

@@ -26,11 +26,8 @@ class PasswordField extends StatelessWidget {
 					obscureText: obscureText,
 					decoration: new InputDecoration(
 						errorText: passwordError,
-						contentPadding: const EdgeInsets.all(12.0),
-						hintText: 'Password',
-						border: new OutlineInputBorder(
-							borderRadius: new BorderRadius.circular(32.0)
-						),
+						contentPadding: const EdgeInsets.symmetric(vertical: 4.0),
+						labelText: 'Password',
 						suffixIcon: new GestureDetector(
 							onTap: togglePassword,
 							child: new Icon(Icons.remove_red_eye),
