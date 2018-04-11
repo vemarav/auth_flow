@@ -1,7 +1,6 @@
 # Flutter - Authentication Flow
 
-This app shows how to authenticate and switch user between pages.
-Ex: Login Page and Home Page.
+Tutorial App for Basic Authentication Flow in flutter.
 
 # Create Account
 
