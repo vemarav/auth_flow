@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -14,11 +13,13 @@ class NetworkUtils {
 		var uri = host + AuthUtils.endPoint;
 
 		try {
-			final response = await http.post(uri, body: {
-				'email': email,
-				'password': password,
-				'authenticate': 'user'
-			});
+			final response = await http.post(
+				uri,
+				body: {
+					'email': email,
+					'password': password
+				}
+			);
 
 			final responseJson = json.decode(response.body);
 			return responseJson;
@@ -46,5 +47,29 @@ class NetworkUtils {
 				content: new Text(message ?? 'You are offline'),
 			)
 		);
+	}
+
+	static fetch(var authToken, var endPoint) async {
+		var uri = host + endPoint;
+
+		try {
+			final response = await http.get(
+				uri,
+				headers: {
+					'Authorization': authToken
+				},
+			);
+
+			final responseJson = json.decode(response.body);
+			return responseJson;
+
+		} catch (exception) {
+			print(exception);
+			if(exception.toString().contains('SocketException')) {
+				return 'NetworkError';
+			} else {
+				return null;
+			}
+		}
 	}
 }

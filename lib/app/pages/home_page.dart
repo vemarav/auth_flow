@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
 	Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
 	SharedPreferences _sharedPreferences;
-	var _authToken, _id, _name;
+	var _authToken, _id, _name, _homeResponse;
 
 	@override
 	void initState() {
@@ -32,15 +32,42 @@ class _HomePageState extends State<HomePage> {
 		String authToken = AuthUtils.getToken(_sharedPreferences);
 		var id = _sharedPreferences.getInt(AuthUtils.userIdKey);
 		var name = _sharedPreferences.getString(AuthUtils.nameKey);
+
+		print(authToken);
+
+		_fetchHome(authToken);
+
 		setState(() {
 			_authToken = authToken;
 			_id = id;
 			_name = name;
 		});
-		print(_authToken);
+
 		if(_authToken == null) {
 			_logout();
 		}
+	}
+
+	_fetchHome(String authToken) async {
+		var responseJson = await NetworkUtils.fetch(authToken, '/api/v1/home');
+
+		if(responseJson == null) {
+
+			NetworkUtils.showSnackBar(_scaffoldKey, 'Something went wrong!');
+
+		} else if(responseJson == 'NetworkError') {
+
+			NetworkUtils.showSnackBar(_scaffoldKey, null);
+
+		} else if(responseJson['errors'] != null) {
+
+			_logout();
+
+		}
+
+		setState(() {
+		  _homeResponse = responseJson.toString();
+		});
 	}
 
 	_logout() {
@@ -62,7 +89,7 @@ class _HomePageState extends State<HomePage> {
 						new Container(
 							padding: const EdgeInsets.all(8.0),
 							child: new Text(
-								"USER_ID: $_id \nUSER_NAME: $_name",
+								"USER_ID: $_id \nUSER_NAME: $_name \nHOME_RESPONSE: $_homeResponse",
 								style: new TextStyle(
 									fontSize: 24.0,
 									color: Colors.grey.shade700

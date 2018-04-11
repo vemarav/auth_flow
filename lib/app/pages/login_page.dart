@@ -63,14 +63,23 @@ class LoginPageState extends State<LoginPage> {
 			var responseJson = await NetworkUtils.authenticateUser(
 				_emailController.text, _passwordController.text
 			);
+
 			print(responseJson);
+
 			if(responseJson == null) {
+
 				NetworkUtils.showSnackBar(_scaffoldKey, 'Something went wrong!');
+
 			} else if(responseJson == 'NetworkError') {
+
 				NetworkUtils.showSnackBar(_scaffoldKey, null);
+
 			} else if(responseJson['errors'] != null) {
+
 				NetworkUtils.showSnackBar(_scaffoldKey, 'Invalid Email/Password');
+
 			} else {
+
 				AuthUtils.insertDetails(_sharedPreferences, responseJson);
 				/**
 				 * Removes stack and start with the new page.
@@ -78,6 +87,7 @@ class LoginPageState extends State<LoginPage> {
 				 * **/
 				Navigator.of(_scaffoldKey.currentContext)
 					.pushReplacementNamed(HomePage.routeName);
+
 			}
 			_hideLoading();
 		} else {
